@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "declaration": true,
+      "module": "commonjs",
+      "strict": true,
+      "moduleResolution": "node",
+      "lib": [
+        "es2020",
+        "dom"
+      ],
+      "target": "es2017",
+      "noImplicitAny": true,
+      "outDir": "./dist/",
+      "preserveConstEnums": true,
+      "removeComments": false,
+      "experimentalDecorators": true,
+      "inlineSourceMap": true
+    },
+    "include": [
+      "./src/**/*"
+    ]
+  }
+  
