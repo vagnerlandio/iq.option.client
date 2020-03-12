@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2020 Wellington Rocha
+ * All Rights Reserved.
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ *
+ * Proprietary and confidential.
+ */
 import axios, { AxiosInstance } from "axios";
 import * as http from "http";
 import * as https from "https";
@@ -35,7 +43,7 @@ export class IQOptionWrapper {
      * @param password
      */
     public constructor(email: string, password: string) {
-        Core.logger().info("IQOptionApi::constructor");
+        Core.logger().silly("IQOptionWrapper::constructor");
         this.email = email;
         this.password = password;
         this.client = axios.create({
@@ -48,6 +56,7 @@ export class IQOptionWrapper {
      * Connect to api.
      */
     public auth(): Promise<string> {
+        Core.logger().silly("IQOptionWrapper::auth");
         return this.request("api/v1.0/login", {
             email: this.email,
             password: this.password
@@ -63,6 +72,7 @@ export class IQOptionWrapper {
      * @param data
      */
     private request(path: string, data?: any) {
+        Core.logger().silly("IQOptionWrapper::request");
         const options: any = {};
         options.method = "POST";
         options.baseURL = this.endpoint;

@@ -6,4 +6,11 @@
  *
  * Proprietary and confidential.
  */
-export * from "./lib";
+
+/**
+ * IQ option name.
+ */
+export enum IQOptionName {
+    SSID = "ssid",
+    SUBSCRIBE_MESSAGE = "subscribeMessage"
+}

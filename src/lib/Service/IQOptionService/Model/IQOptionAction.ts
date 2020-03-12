@@ -6,4 +6,10 @@
  *
  * Proprietary and confidential.
  */
-export * from "./lib";
+
+/**
+ * IQ option action.
+ */
+export enum IQOptionAction {
+    CANDLE_GENERATED = "candle-generated"
+}

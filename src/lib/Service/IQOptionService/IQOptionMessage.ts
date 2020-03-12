@@ -1,5 +1,14 @@
+/*
+ * Copyright (C) 2020 Wellington Rocha
+ * All Rights Reserved.
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ *
+ * Proprietary and confidential.
+ */
+
 /**
- * Option message.
+ * Messages.
  */
 export class IQOptionMessage {
     /**
@@ -8,5 +17,6 @@ export class IQOptionMessage {
      * @param message
      */
     public onMessage(message: string) {
+        console.log(message);
     }
 }
