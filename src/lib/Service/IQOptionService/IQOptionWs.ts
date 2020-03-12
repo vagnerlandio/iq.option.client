@@ -8,7 +8,6 @@
  */
 import * as WebSocket from "ws";
 import * as Core from "../../index";
-import { IQOptionMessage } from "./IQOptionMessage";
 
 /**
  * IqOptionWs;
@@ -22,31 +21,25 @@ export class IQOptionWs {
     /**
      * Socket client.
      */
-    private socket!: WebSocket;
+    private _socket!: WebSocket;
 
     /**
-     * IQOptionMessage.
-     */
-    private readonly iqOptionMessage: IQOptionMessage = new IQOptionMessage();
-
-    /**
-     * Wait time to restart socket.
+     * Wait time to restart _socket.
      */
     private readonly waitToRestart = 1000;
 
     /**
-     * Start socket.
+     * Start _socket.
      */
     public connect(): Promise<void> {
         try {
             Core.logger().silly("IQOptionWs::connect");
             return new Promise((resolve, reject) => {
-                this.socket = new WebSocket(`${this.endpoint}//echo/websocket`);
-                this.socket.on("open", () => resolve());
-                this.socket.on("message", message =>
-                    this.iqOptionMessage.onMessage(message.toString())
+                this._socket = new WebSocket(
+                    `${this.endpoint}//echo/websocket`
                 );
-                this.socket.on("close", () => this.restartSocket());
+                this._socket.on("open", () => resolve());
+                this._socket.on("close", () => this.restartSocket());
             });
         } catch (e) {
             return Promise.reject();
@@ -61,11 +54,11 @@ export class IQOptionWs {
      */
     public send(name: Core.IQOptionName, msg: any): Promise<any> {
         Core.logger().silly("IQOptionWs::send");
-        if (!this.socket) {
+        if (!this._socket) {
             return Promise.reject("Socket is not connected.");
         }
         return Promise.resolve(
-            this.socket.send(
+            this._socket.send(
                 JSON.stringify({
                     name,
                     msg
@@ -75,14 +68,21 @@ export class IQOptionWs {
     }
 
     /**
-     * Is connected.
+     * Get _socket.
      */
-    public isConnected(): boolean {
-        return this.socket === undefined;
+    public socket() {
+        return this._socket;
     }
 
     /**
-     * Restart socket.
+     * Is connected.
+     */
+    public isConnected(): boolean {
+        return this._socket === undefined;
+    }
+
+    /**
+     * Restart _socket.
      */
     private restartSocket() {
         Core.logger().silly("IQOptionWs::restartSocket");

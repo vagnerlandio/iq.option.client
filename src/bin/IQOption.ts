@@ -57,26 +57,21 @@
 //
 // })
 // .catch(e => logger().error(e.error));
-import { logger } from "../lib/Helper";
-import {
-    IQOptionApi,
-    IQOptionMarket,
-    IQOptionTime
-} from "../lib/Service/IQOptionService";
-
-const iqOptionApi = new IQOptionApi("", "");
+import * as Core from "../lib"
+const iqOptionApi = new Core.IQOptionApi("liie.m@excelbangkok.com", "Code11054");
 iqOptionApi
     .connectAsync()
     .then(async () => {
-        setTimeout(
-            () =>
-                iqOptionApi.subscribeCandle(
-                    IQOptionMarket.EURUSD,
-                    IQOptionTime.FIVE_MINUTES
-                ),
-            1000
+        await Core.sleepHelper(1000);
+        const candleStream = new Core.IQOptionStreamCandleGenerated(
+            iqOptionApi.getIQOptionWs(),
+            Core.IQOptionMarket.EURUSD,
+            Core.IQOptionTime.FIVE_MINUTES
         );
+        await candleStream.startStream();
+        candleStream.on("data", data => Core.logger().info(JSON.stringify(data)));
+        // t.on("data", () => {});
     })
     .catch((e: any) => {
-        logger().error(e.message);
+        Core.logger().error(JSON.stringify(e));
     });

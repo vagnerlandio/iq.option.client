@@ -56,25 +56,9 @@ export class IQOptionApi {
     }
 
     /**
-     * Subscribe candle.
-     *
-     * @param market
-     * @param time
+     * Get iq option ws.
      */
-    public subscribeCandle(
-        market: Core.IQOptionMarket,
-        time: Core.IQOptionTime
-    ): Promise<void> {
-        Core.logger().silly("IQOptionApi::subscribeCandle");
-        if (this.iqOptionWs.isConnected()) {
-            return Promise.reject("Socket is not connected.");
-        }
-        const message = {
-            name: Core.IQOptionAction.CANDLE_GENERATED,
-            params: { routingFilters: { active_id: market, size: time } }
-        };
-        return Promise.resolve(
-            this.iqOptionWs.send(Core.IQOptionName.SUBSCRIBE_MESSAGE, message)
-        );
+    public getIQOptionWs(): IQOptionWs {
+        return this.iqOptionWs;
     }
 }
