@@ -9,6 +9,7 @@
 import * as Core from "../../index";
 import { IQOptionWrapper } from "./IQOptionWrapper";
 import { IQOptionWs } from "./IQOptionWs";
+import {iqOptionExpired} from "./IQOptionExpired";
 
 /**
  * IQOption api.
@@ -60,5 +61,32 @@ export class IQOptionApi {
      */
     public getIQOptionWs(): IQOptionWs {
         return this.iqOptionWs;
+    }
+
+    /**
+     * Send order.
+     *
+     * @param market
+     * @param side
+     * @param time
+     * @param amount
+     */
+    public sendOrderBinary(
+        market: Core.IQOptionMarket,
+        side: Core.IQOptionModel,
+        time: Core.IQOptionTime,
+        amount: number
+    ): Promise<void> {
+        Core.logger().info(`IQOptionApi::sendOrder`, {market, side, time, amount});
+        return this.iqOptionWs.send(Core.IQOptionName.SEND_MESSAGE, {
+            user_balance_id: 86332727, // todo
+            active_id: market,
+            option_type_id: 3, // todo
+            direction: side,
+            expired: iqOptionExpired(time),
+            refund_value: 0, // todo
+            price: amount,
+            profit_percent: 55 // todo
+        });
     }
 }

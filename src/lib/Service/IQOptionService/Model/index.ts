@@ -10,3 +10,5 @@ export * from "./IQOptionMarket";
 export * from "./IQOptionTime";
 export * from "./IQOptionName";
 export * from "./IQOptionAction";
+export * from "./IQOptionModel";
+export * from "./IQOptionCandle";

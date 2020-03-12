@@ -8,10 +8,16 @@
  */
 
 /**
- * IQ option name.
+ * Model types.
  */
-export enum IQOptionName {
-    SSID = "ssid",
-    SUBSCRIBE_MESSAGE = "subscribeMessage",
-    SEND_MESSAGE = "sendMessage"
+export enum IQOptionModel {
+    /**
+     * Buy order.
+     */
+    BUY = "call",
+
+    /**
+     * Sell order.
+     */
+    SELL = "put"
 }
