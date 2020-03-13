@@ -22,5 +22,6 @@ export class MainHandler {
         //         return Promise.resolve(Core.StrategyBuild.build());
         //     });
         // });
+        return Promise.resolve();
     }
 }

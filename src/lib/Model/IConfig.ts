@@ -11,24 +11,24 @@ import * as Core from "..";
 /**
  * Config.
  */
-export interface Config {
+export interface IConfig {
     /**
      * Strategy.
      */
-    strategy: Core.IStrategyConfig,
+    strategy: Core.IStrategyConfig;
 
     /**
      * Conditions.
      */
-    conditions: Core.IIndicatorConfig[],
+    conditions: Core.IIndicatorConfig[];
 
     /**
      * Stop loss default configuration.
      */
-    stopLoss?: Core.IStopLossConfig, 
+    stopLoss?: Core.IStopLossConfig;
 
     /**
      * Take profit default configuration.
      */
-    takeProfit?: Core.ITakeProfitConfig
+    takeProfit?: Core.ITakeProfitConfig;
 }

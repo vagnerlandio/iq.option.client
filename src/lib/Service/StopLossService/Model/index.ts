@@ -6,6 +6,6 @@
  *
  * Proprietary and confidential.
  */
- 
+
 export * from "./IStopLossConfig";
 export * from "./StopLossType";

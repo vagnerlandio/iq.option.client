@@ -7,9 +7,9 @@
  * Proprietary and confidential.
  */
 
- /**
-  * Indicator.
-  */
+/**
+ * Indicator.
+ */
 export enum Indicator {
     RSI = "RSI"
 }

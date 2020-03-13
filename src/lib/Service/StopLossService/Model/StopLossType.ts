@@ -14,10 +14,10 @@ export enum StopLossType {
     /**
      * Number fixed.
      */
-    FIXED = 'fixed',
+    FIXED = "fixed",
 
     /**
      * Percent.
      */
-    PERCENT = 'percent'
+    PERCENT = "percent"
 }

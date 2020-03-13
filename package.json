@@ -9,7 +9,7 @@
     "test:coverage": "jest --detectOpenHandles --coverage",
     "format": "prettier --write '{src,test}/**/*.ts' && tslint --force --fix --format verbose 'src/**/*.ts'",
     "build": "npm run clean && tsc -p tsconfig.json --pretty",
-    "sample:iqoption": "npm run build && LOG_LEVEL=silly ENVIRONMENT=LOCAL node dist/bin/IQOption.js"
+    "start": "npm run build && LOG_LEVEL=silly ENVIRONMENT=LOCAL node dist/bin/IQOptionBot.js"
   },
   "author": "Wellington Rocha",
   "license": "ISC",

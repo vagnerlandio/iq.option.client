@@ -7,9 +7,9 @@
  * Proprietary and confidential.
  */
 
- /**
-  * Default timestamp.
-  */
+/**
+ * Default timestamp.
+ */
 export const timestampHelper = () => {
     return new Date().toISOString();
 };

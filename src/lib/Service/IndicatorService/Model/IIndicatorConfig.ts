@@ -8,19 +8,19 @@
  */
 import * as Core from "..";
 
- /**
-  * Indicator config.
-  */
- export interface IIndicatorConfig {
-     /**
-      * Indicator disponible.
-      */
+/**
+ * Indicator config.
+ */
+export interface IIndicatorConfig {
+    /**
+     * Indicator disponible.
+     */
     indicator: Core.Indicator;
 
     /**
      * Periods.
      */
-    periods: number[],
+    periods: number[];
 
     /**
      * Buy entry.
@@ -29,26 +29,26 @@ import * as Core from "..";
         /**
          * Condition.
          */
-        condition: Core.IndicatorCondition,
+        condition: Core.IndicatorCondition;
 
         /**
          * Value.
          */
-        value: number
-    },
+        value: number;
+    };
 
-     /**
+    /**
      * Sell entry.
      */
     sellEntry: {
         /**
          * Condition.
          */
-        condition: Core.IndicatorCondition,
+        condition: Core.IndicatorCondition;
 
         /**
          * Value.
          */
-        value: number
-    }
+        value: number;
+    };
 }

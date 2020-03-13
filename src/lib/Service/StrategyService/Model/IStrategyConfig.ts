@@ -6,55 +6,56 @@
  *
  * Proprietary and confidential.
  */
-import * as Core from "./";
 import * as IQOptionClient from "iqoption.client";
+import * as Core from "./";
 
- /**
-  * Strategy config.
-  */
- export interface IStrategyConfig {
+/**
+ * Strategy config.
+ */
+export interface IStrategyConfig {
     /**
      * Strategy name..
-     */ 
-    strategy: Core.Strategy,
+     */
 
-     /**
-      * Balance available.
-      */
-     balanceAvailable: number,
+    strategy: Core.Strategy;
 
-     /**
-      * Balance in currency.
-      */
-     balanceInCurrency: IQOptionClient.IQOptionCurrency,
+    /**
+     * Balance available.
+     */
+    balanceAvailable: number;
 
-     /**
-      * Value type.
-      */
-     valueType: Core.StrategyValueType,
+    /**
+     * Balance in currency.
+     */
+    balanceInCurrency: IQOptionClient.IQOptionCurrency;
 
-     /**
-      * Value.
-      */
-     value: number,
+    /**
+     * Value type.
+     */
+    valueType: Core.StrategyValueType;
 
-     /**
-      * Market.
-      */
-     market: IQOptionClient.IQOptionMarket, 
+    /**
+     * Value.
+     */
+    value: number;
 
-     /**
-      * Percent gain.
-      */
-     percentGain: number,
+    /**
+     * Market.
+     */
+    market: IQOptionClient.IQOptionMarket;
 
-     /**
-      * Time.
-      */
-     time: IQOptionClient.IQOptionTime, 
+    /**
+     * Percent gain.
+     */
+    percentGain: number;
 
-     /**
-      * Test???
-      */
-     test: boolean
+    /**
+     * Time.
+     */
+    time: IQOptionClient.IQOptionTime;
+
+    /**
+     * Test???
+     */
+    test: boolean;
 }

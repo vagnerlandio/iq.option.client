@@ -7,9 +7,9 @@
  * Proprietary and confidential.
  */
 
- /**
-  * Indicator condition.
-  */
+/**
+ * Indicator condition.
+ */
 export enum IndicatorCondition {
     /**
      * Condition (<).
@@ -39,5 +39,5 @@ export enum IndicatorCondition {
     /**
      * Condtion (!=).
      */
-    NOT_EQUAL_TO = "NOT_EQUAL_TO",
+    NOT_EQUAL_TO = "NOT_EQUAL_TO"
 }

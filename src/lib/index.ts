@@ -9,3 +9,5 @@
 export * from "./Helper";
 export * from "./Event";
 export * from "./Service";
+export * from "./MainHandler";
+export * from "./Model";

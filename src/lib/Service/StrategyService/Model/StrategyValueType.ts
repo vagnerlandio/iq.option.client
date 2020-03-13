@@ -14,10 +14,10 @@ export enum StrategyValueType {
     /**
      * Number fixed.
      */
-    FIXED = 'fixed',
+    FIXED = "fixed",
 
     /**
      * Percent.
      */
-    PERCENT = 'percent'
+    PERCENT = "percent"
 }

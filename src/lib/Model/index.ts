@@ -6,7 +6,4 @@
  *
  * Proprietary and confidential.
  */
-
-export * from "./IStrategyConfig";
-export * from "./StrategyValueType";
-export * from "./Strategy";
+export * from "./IConfig";

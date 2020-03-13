@@ -8,18 +8,18 @@
  */
 import * as Core from "..";
 
- /**
-  * Strategy config.
-  */
- export interface IStopLossConfig {
-     /**
-      * Types.
-      */
+/**
+ * Strategy config.
+ */
+export interface IStopLossConfig {
+    /**
+     * Types.
+     */
     type: Core.StopLossType;
 
     /**
-      * Value..
-      */
+     * Value..
+     */
     value: number;
 
     /**

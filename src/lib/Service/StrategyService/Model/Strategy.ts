@@ -10,19 +10,19 @@
 /**
  * Strategy.
  */
-export enum Strategy{
+export enum Strategy {
     /**
      * Simple continuos trade.
      */
-    SIMPLE = 'simple',
+    SIMPLE = "simple",
 
     /**
      * Strategy Gerge Soros.
      */
-    SOROS = 'soros',
+    SOROS = "soros",
 
     /**
      * Strategy Martingale.
      */
-    MARTINGALE = 'martingale'
+    MARTINGALE = "martingale"
 }

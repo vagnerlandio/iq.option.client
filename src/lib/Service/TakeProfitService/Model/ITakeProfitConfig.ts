@@ -8,22 +8,22 @@
  */
 import * as Core from "..";
 
- /**
-  * Take profit config.
-  */
-export interface ITakeProfitConfig{
-     /**
-      * Types.
-      */
-     type: Core.TakeProfitType;
+/**
+ * Take profit config.
+ */
+export interface ITakeProfitConfig {
+    /**
+     * Types.
+     */
+    type: Core.TakeProfitType;
 
-     /**
-       * Value.
-       */
-     value: number;
- 
-     /**
-      * Trailing.
-      */
-     trailing?: boolean;
+    /**
+     * Value.
+     */
+    value: number;
+
+    /**
+     * Trailing.
+     */
+    trailing?: boolean;
 }
