@@ -7,6 +7,7 @@
  * Proprietary and confidential.
  */
 import * as Core from "./";
+import * as IQOptionClient from "iqoption.client";
 
  /**
   * Strategy config.
@@ -25,7 +26,7 @@ import * as Core from "./";
      /**
       * Balance in currency.
       */
-     balanceInCurrency: Core.StrategyCurrency,
+     balanceInCurrency: IQOptionClient.IQOptionCurrency,
 
      /**
       * Value type.
@@ -40,7 +41,7 @@ import * as Core from "./";
      /**
       * Market.
       */
-     market: string, // iq option client.
+     market: IQOptionClient.IQOptionMarket, 
 
      /**
       * Percent gain.
@@ -50,7 +51,7 @@ import * as Core from "./";
      /**
       * Time.
       */
-     time: number, // iq option client
+     time: IQOptionClient.IQOptionTime, 
 
      /**
       * Test???

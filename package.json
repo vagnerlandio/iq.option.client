@@ -21,6 +21,7 @@
     "@types/helmet": "0.0.45",
     "@types/jsonwebtoken": "^8.3.8",
     "@types/ws": "^6.0.4",
+    "iqoption.client": "git+ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/iq.option.client#master",
     "async-lock": "^1.2.2",
     "axios": "^0.19.0",
     "bignumber.js": "^9.0.0",
