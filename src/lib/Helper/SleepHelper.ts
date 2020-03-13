@@ -1,0 +1,19 @@
+/*
+ * Copyright (C) 2020 Wellington Rocha
+ * All Rights Reserved.
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ *
+ * Proprietary and confidential.
+ */
+
+/**
+ * Sleep helper.
+ *
+ * @param time
+ */
+export const sleepHelper = (time: number): Promise<void> => {
+    return new Promise(resolve => {
+        setTimeout(() => resolve(), time);
+    });
+};

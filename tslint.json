@@ -1,0 +1,16 @@
+{
+    "extends": [
+        "tslint:latest",
+        "tslint-config-prettier"
+    ],
+    "rules": {
+        "interface-name": [true, "always-prefix"],
+        "no-implicit-dependencies": [true, "dev"],
+        "object-literal-sort-keys": false,
+        "no-console": true,
+        "no-empty-interface": false,
+        "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-snake-case"],
+        "completed-docs": true,
+        "only-arrow-functions": true
+    }
+}

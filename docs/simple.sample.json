@@ -1,0 +1,47 @@
+{
+    "strategy": {
+        "strategy": "simple",
+        "balanceAvailable": 10000,
+        "balanceInCurrency": "BRL",
+        "options": {
+            "valueType": "percent", // fixed | percent
+            "value": 1,
+            "market": "EURUSD",
+            "percentGain": 85,
+            "time": 5,
+            "test": true // test ignore currency
+        }
+    },
+    "conditions": [
+        {
+            "indicator": "RSI",
+            "periods": [17],
+            "time": 5,
+            "buyEntry": {
+                "moreThan": 72
+            },
+            "sellEntry": {
+                "lessThan": 28
+            }
+        },
+        {
+            "indicator": "MACD",
+            "periods": [12, 26, 9],
+            "time": 5,
+            "buyEntry": {
+                "moreThan": 72
+            },
+            "sellEntry": {
+                "lessThan": 30
+            }
+        }
+    ],
+    "stopLoss": {
+        "type": "percent", // percent | currency
+        "value": 30
+    },
+    "takeProfit": {
+        "type": "percent", // percent | currency
+        "value": 100
+    }
+}
