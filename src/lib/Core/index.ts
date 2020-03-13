@@ -6,9 +6,5 @@
  *
  * Proprietary and confidential.
  */
-export * from "./Helper";
-export * from "./Event";
-export * from "./Service";
-export * from "./MainHandler";
-export * from "./Model";
-export * from "./Core";
+export * from "./Config";
+export * from "./Global";

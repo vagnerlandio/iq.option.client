@@ -15,5 +15,5 @@ export const global: {
     /**
      * Config.
      */
-    config: Core.IConfig
+    config: Core.IConfig;
 } = {} as any;

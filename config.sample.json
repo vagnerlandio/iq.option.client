@@ -2,13 +2,13 @@
     "strategy": {
         "strategy": "martingale",
         "options": {
-            "valueType": "fixed", // fixed | default
+            "valueType": "fixed",
             "value": 10,
             "market": "EURUSD",
-            "currency": "USD", // USD | BRL ...
+            "currency": "USD",
             "percentGain": 85,
             "time": 5,
-            "test": true, // test ignore currency
+            "test": true,
             "martingaleMaxAttempts": 3
         }
     },
@@ -37,11 +37,11 @@
         }
     ],
     "stopLoss": {
-        "type": "percent", // percent | currency
+        "type": "percent",
         "value": 10
     },
     "takeProfit": {
-        "type": "percent", // percent | currency
+        "type": "percent",
         "value": 5
     }
 }
