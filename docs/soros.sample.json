@@ -1,0 +1,46 @@
+{
+    "strategy": {
+        "strategy": "soros",
+        "options": {
+            "valueType": "fixed", // fixed | default
+            "value": 10,
+            "currency": "USD",
+            "market": "EURUSD",
+            "percentGain": 85,
+            "time": 5,
+            "test": true // test ignore currency
+        }
+    },
+    "conditions": [
+        {
+            "indicator": "RSI",
+            "periods": [17],
+            "time": 5,
+            "buyEntry": {
+                "moreThan": 72
+            },
+            "sellEntry": {
+                "lessThan": 30
+            }
+        },
+        {
+            "indicator": "MACD",
+            "periods": [12, 26, 9],
+            "time": 5,
+            "buyEntry": {
+                "moreThan": 72
+            },
+            "sellEntry": {
+                "lessThan": 30
+            }
+        }
+    ],
+    "stopLoss": {
+        "type": "percent", // percent | currency
+        "value": 10
+    },
+    "takeProfit": {
+        "type": "percent", // percent | currency
+        "value": 5
+    }
+}

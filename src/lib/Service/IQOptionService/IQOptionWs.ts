@@ -51,20 +51,25 @@ export class IQOptionWs {
      *
      * @param name
      * @param msg
+     * @param requestId
      */
-    public send(name: Core.IQOptionName, msg: any): Promise<any> {
+    public send(
+        name: Core.IQOptionName,
+        msg: any,
+        requestId?: number
+    ): Promise<any> {
         Core.logger().silly("IQOptionWs::send");
         if (!this._socket) {
             return Promise.reject("Socket is not connected.");
         }
-        return Promise.resolve(
-            this._socket.send(
-                JSON.stringify({
-                    name,
-                    msg
-                })
-            )
-        );
+        const message: any = {
+            name,
+            msg
+        };
+        if (requestId) {
+            message.request_id = requestId;
+        }
+        return Promise.resolve(this._socket.send(JSON.stringify(message)));
     }
 
     /**

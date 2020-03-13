@@ -14,70 +14,70 @@ export interface IQOptionCandle {
     /**
      * active_id.
      */
-    active_id: number,
+    active_id: number;
 
     /**
      * size.
      */
-    size: number,
+    size: number;
 
     /**
      * at.
      */
-    at: number,
+    at: number;
 
     /**
      * from.
      */
-    from: number,
+    from: number;
 
     /**
      * to.
      */
-    to: number,
+    to: number;
 
     /**
      * id.
      */
-    id: number,
+    id: number;
 
     /**
      * open.
      */
-    open: number,
+    open: number;
 
     /**
      * close.
      */
-    close: number,
+    close: number;
 
     /**
      * min.
      */
-    min: number,
+    min: number;
 
     /**
      * max.
      */
-    max: number,
+    max: number;
 
     /**
      * ask.
      */
-    ask: number,
+    ask: number;
 
     /**
      * bid.
      */
-    bid: number,
+    bid: number;
 
     /**
      * volume.
      */
-    volume: number,
+    volume: number;
 
     /**
      * phase.
      */
-    phase: string
+    phase: string;
 }

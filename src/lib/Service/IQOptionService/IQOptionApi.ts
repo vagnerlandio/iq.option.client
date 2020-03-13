@@ -7,14 +7,19 @@
  * Proprietary and confidential.
  */
 import * as Core from "../../index";
+import { iqOptionExpired } from "./IQOptionExpired";
 import { IQOptionWrapper } from "./IQOptionWrapper";
 import { IQOptionWs } from "./IQOptionWs";
-import {iqOptionExpired} from "./IQOptionExpired";
 
 /**
  * IQOption api.
  */
 export class IQOptionApi {
+    /**
+     * Max wait profile response.
+     */
+    private readonly maxWaitProfile = 5000;
+
     /**
      * IQ option wrapper.
      */
@@ -40,7 +45,7 @@ export class IQOptionApi {
     /**
      * Connect async.
      */
-    public connectAsync(): Promise<void> {
+    public connectAsync(): Promise<Core.IQOptionProfile> {
         Core.logger().silly("IQOptionApi::connectAsync");
         return this.iqOptionWrapper
             .auth()
@@ -50,7 +55,7 @@ export class IQOptionApi {
                     .then(() =>
                         this.iqOptionWs.send(Core.IQOptionName.SSID, token)
                     )
-                    .then(() => Promise.resolve())
+                    .then(() => this.profileAsync())
                     .catch(e => Promise.reject(e));
             })
             .catch(e => Promise.reject(e));
@@ -61,6 +66,25 @@ export class IQOptionApi {
      */
     public getIQOptionWs(): IQOptionWs {
         return this.iqOptionWs;
+    }
+
+    /**
+     * Wait to get user profile.
+     */
+    public profileAsync(): Promise<Core.IQOptionProfile> {
+        Core.logger().silly("IQOptionApi::profileAsync");
+        return new Promise((resolve, reject) => {
+            this.iqOptionWs.socket().on("message", message => {
+                const messageJSON = JSON.parse(message.toString());
+                if (messageJSON.name === Core.IQOptionAction.PROFILE) {
+                    resolve(messageJSON.msg);
+                }
+            });
+            setTimeout(
+                () => reject("It was not possible to receive the profile."),
+                this.maxWaitProfile
+            );
+        });
     }
 
     /**
@@ -75,18 +99,29 @@ export class IQOptionApi {
         market: Core.IQOptionMarket,
         side: Core.IQOptionModel,
         time: Core.IQOptionTime,
+        userBalanceId: number,
+        profitPercent: number,
         amount: number
     ): Promise<void> {
-        Core.logger().info(`IQOptionApi::sendOrder`, {market, side, time, amount});
+        Core.logger().info(`IQOptionApi::sendOrder`, {
+            market,
+            side,
+            time,
+            amount
+        });
         return this.iqOptionWs.send(Core.IQOptionName.SEND_MESSAGE, {
-            user_balance_id: 86332727, // todo
-            active_id: market,
-            option_type_id: 3, // todo
-            direction: side,
-            expired: iqOptionExpired(time),
-            refund_value: 0, // todo
-            price: amount,
-            profit_percent: 55 // todo
+            name: Core.IQOptionAction.BINARY_OPEN_OPTION,
+            version: "1.0",
+            body: {
+                user_balance_id: userBalanceId,
+                active_id: market,
+                option_type_id: 3, // todo
+                direction: side,
+                expired: iqOptionExpired(time),
+                refund_value: 0, // todo
+                price: amount,
+                profit_percent: profitPercent // todo
+            }
         });
     }
 }
