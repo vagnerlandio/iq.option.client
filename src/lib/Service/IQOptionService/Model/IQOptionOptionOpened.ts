@@ -1,36 +1,39 @@
-{
-    "index": 2928643737,
-    "value": 1.114555,
-    "active": "EURUSD",
-    "aff_id": 0,
-    "amount": 100.00,
-    "params": null,
-    "balance": 15775290000,
-    "is_demo": false,
-    "user_id": 34559853,
-    "currency": "USD",
-    "robot_id": null,
-    "active_id": 1,
-    "aff_track": "",
-    "direction": "call",
-    "open_time": 1584102857,
-    "option_id": 6277429609,
-    "balance_id": 86332727,
-    "bonus_rate": 1,
-    "country_id": 194,
-    "inout_diff": 0,
-    "option_type": "turbo",
-    "platform_id": 82,
-    "is_can_trade": true,
-    "currency_mask": "$%s",
-    "profit_amount": 0,
-    "tournament_id": null,
-    "user_group_id": 191,
-    "option_type_id": 3,
-    "profit_percent": 177,
-    "balance_type_id": 4,
-    "enrolled_amount": 100.00,
-    "expiration_time": 1584103140,
-    "client_platform_id": 15,
-    "open_time_millisecond": 1584102857555
+/**
+ * Option Opened.
+ */
+export interface IQOptionOptionOpened {
+    index: number;
+    value: number;
+    active: string;
+    aff_id: number;
+    amount: number;
+    params: null;
+    balance: number;
+    is_demo: boolean;
+    user_id: number;
+    currency: string;
+    robot_id: null;
+    active_id: number;
+    aff_track: string;
+    direction: string;
+    open_time: number;
+    option_id: number;
+    balance_id: number;
+    bonus_rate: number;
+    country_id: number;
+    inout_diff: number;
+    option_type: string;
+    platform_id: number;
+    is_can_trade: boolean;
+    currency_mask: string;
+    profit_amount: number;
+    tournament_id: null;
+    user_group_id: number;
+    option_type_id: number;
+    profit_percent: number;
+    balance_type_id: number;
+    enrolled_amount: number;
+    expiration_time: number;
+    client_platform_id: number;
+    open_time_millisecond: number;
 }

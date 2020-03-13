@@ -6,7 +6,6 @@
  *
  * Proprietary and confidential.
  */
-import * as talib from "ta-lib";
 import * as Core from "../lib";
 
 const iqOptionApi = new Core.IQOptionApi(
@@ -89,18 +88,48 @@ iqOptionApi
         // });
 
         // SEND ORDER
-        await iqOptionApi.sendOrderBinary(
-            Core.IQOptionMarket.EURUSD,
-            Core.IQOptionModel.BUY,
-            time,
-            balance.id,
-            profitPercent,
-            100
-        );
-        iqOptionApi
-            .getIQOptionWs()
-            .socket()
-            .on("message", data => console.log(data));
+
+        // await iqOptionApi.sendOrderBinary(
+        //     Core.IQOptionMarket.EURUSD,
+        //     Core.IQOptionModel.BUY,
+        //     time,
+        //     balance.id,
+        //     profitPercent,
+        //     100
+        // );
+        // console.log('REQUEST ORDER 2')
+        // await iqOptionApi.sendOrderBinary(
+        //     Core.IQOptionMarket.EURUSD,
+        //     Core.IQOptionModel.BUY,
+        //     time,
+        //     balance.id,
+        //     profitPercent,
+        //     100
+        // );
+        const ordersCreated = await Promise.all([
+            iqOptionApi.sendOrderBinary(
+                Core.IQOptionMarket.EURUSD,
+                Core.IQOptionModel.BUY,
+                time,
+                balance.id,
+                profitPercent,
+                100
+            ),
+            iqOptionApi.sendOrderBinary(
+                Core.IQOptionMarket.EURUSD,
+                Core.IQOptionModel.BUY,
+                time,
+                balance.id,
+                profitPercent,
+                100
+            )
+        ]);
+        console.log(console.log(ordersCreated));
+        // console.log(requestId);
+        // iqOptionApi
+        //     .getIQOptionWs()
+        //     .socket()
+        //     .on("message", data => console.log(data));
     })
     .catch((e: any) => {
         Core.logger().error(JSON.stringify(e));
