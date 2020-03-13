@@ -58,4 +58,9 @@ export interface IStrategyConfig {
      * Test???
      */
     test: boolean;
+
+    /**
+     * Martingale max attempts.
+     */
+    martingaleMaxAttempts?: number;
 }

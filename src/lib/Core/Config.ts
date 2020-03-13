@@ -17,7 +17,7 @@ export abstract class Config {
      * Buid config.
      */
     public static build(): Promise<void> {
-        Core.logger().silly(`Application::build`);
+        Core.logger().silly(`Config::build`);
         return new Promise((resolve, reject) => {
             FileSystem.copyFile(
                 "config.sample.json",

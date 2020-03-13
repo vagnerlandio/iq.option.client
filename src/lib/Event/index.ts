@@ -7,5 +7,4 @@
  * Proprietary and confidential.
  */
 export * from "./EventManager";
-export * from "./EventLock";
 export * from "./Model";

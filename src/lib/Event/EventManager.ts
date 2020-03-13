@@ -16,7 +16,7 @@ export abstract class EventManager {
     /**
      * Load event emitter.
      */
-    public static loadEventEmitter(): EventEmitter {
+    public static build(): EventEmitter {
         Core.logger().silly(`EventManager::loadEventEmitter`);
         if (!EventManager.eventEmitter) {
             EventManager.eventEmitter = new EventEmitter();
@@ -30,7 +30,10 @@ export abstract class EventManager {
      * @param eventName
      * @param event
      */
-    public static registerEvent(eventName: Core.Events, event: any): string {
+    public static registerEvent(
+        eventName: Core.StopLossEvent,
+        event: any
+    ): string {
         Core.logger().silly(`EventManager::registerEvent[${eventName}]`);
         this.eventEmitter.on(eventName, args => event(args));
         return eventName;
@@ -42,13 +45,11 @@ export abstract class EventManager {
      * @param eventName
      * @param args
      */
-    public static emit(eventName: Core.Events, ...args: any): void {
-        if (Core.EventLock.isLocked(eventName)) {
-            return;
-        }
-        Core.logger().silly(
-            `EventManager::emit[${eventName}][${JSON.stringify(args)}]`
-        );
+    public static emit(
+        eventName: Core.StopLossEvent,
+        ...args: any
+    ): void {
+        Core.logger().silly(`EventManager::emit[${eventName}]`);
         this.eventEmitter.emit(eventName, args);
     }
 

@@ -17,11 +17,10 @@ export class MainHandler {
      */
     public startStrategy(): Promise<void> {
         Core.logger().info(`${Core.timestampHelper()} IQOptionBot started`);
-        // return Core.build(this.environment).then(() => {
-        //     return Core.Bootstrap.loadServices(this.environment).then(() => {
-        //         return Promise.resolve(Core.StrategyBuild.build());
-        //     });
-        // });
-        return Core.Config.build();
+        return Core.Config.build()
+            .then(() => Core.EventManager.build())
+            .then(() => Core.StrategyServiceBuild.build())
+            .then(() => Promise.resolve())
+            .catch(e => Promise.reject(e));
     }
 }

@@ -9,3 +9,4 @@
 
 export * from "./IStopLossConfig";
 export * from "./StopLossType";
+export * from "./StopLossEvent";

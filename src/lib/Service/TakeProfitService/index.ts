@@ -8,3 +8,4 @@
  */
 
 export * from "./Model";
+export * from "./TakeProfitServiceBuild";

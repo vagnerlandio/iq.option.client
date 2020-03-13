@@ -8,3 +8,5 @@
  */
 
 export * from "./Model";
+export * from "./StopLossServiceBuild";
+export * from "./StopLossService";

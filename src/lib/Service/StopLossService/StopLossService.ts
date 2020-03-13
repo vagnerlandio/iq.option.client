@@ -6,6 +6,14 @@
  *
  * Proprietary and confidential.
  */
-export enum Events {
-    EV = "EEEE"
+import * as Core from "../..";
+
+/**
+ * Stop loss service.
+ */
+export class StopLossService {
+    /**
+     * Stop loss observable.
+     */
+    public stopLossObservable() {}
 }
