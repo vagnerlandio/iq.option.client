@@ -57,18 +57,22 @@ iqOptionApi
     .connectAsync()
     .then(async profile => {
         // OPTIONS
-        const currency = Core.IQOptionCurrency.USD;
-        const profitPercent = 87;
-        const market = Core.IQOptionMarket.EURUSD_OTC;
-        const time = Core.IQOptionTime.ONE_MINUTE;
+        // const currency = Core.IQOptionCurrency.USD;
+        // const profitPercent = 87;
+        // const market = Core.IQOptionMarket.EURUSD_OTC;
+        // const time = Core.IQOptionTime.ONE_MINUTE;
 
-        const candleStream = new Core.IQOptionStreamCandleGenerated(
-            iqOptionApi.getIQOptionWs(),
-            market,
-            time
-        );
+        // const candleStream = new Core.IQOptionStreamCandleGenerated(
+        //     iqOptionApi.getIQOptionWs(),
+        //     market,
+        //     time
+        // );
 
-        const balance = findUserBalanceFiat(profile.balances, currency, true);
+        // const balance = findUserBalanceFiat(profile.balances, currency, true);
+        iqOptionApi.getIQOptionWs().socket().on("message", data => console.log(data));
+        await Core.sleepHelper(2000)
+        await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"get-instruments","version":"4.0","body":{"type":"cfd"}});
+    
 
         // START STREAM
         // await candleStream.startStream();
@@ -106,22 +110,22 @@ iqOptionApi
         //     profitPercent,
         //     100
         // );
-        const ordersCreated = await Promise.all([
-            iqOptionApi.sendOrderBinary(
-                Core.IQOptionMarket.EURUSD_OTC,
-                Core.IQOptionModel.BUY,
-                time,
-                balance.id,
-                profitPercent,
-                100
-            )
-        ]);
-        const optionCloseStream = new Core.IQOptionStreamOptionClose(
-            iqOptionApi.getIQOptionWs(),
-            market
-        );
-        await optionCloseStream.startStream();
-        optionCloseStream.on("data", data => console.log(data));
+        // const ordersCreated = await Promise.all([
+        //     iqOptionApi.sendOrderBinary(
+        //         Core.IQOptionMarket.EURUSD_OTC,
+        //         Core.IQOptionModel.BUY,
+        //         time,
+        //         balance.id,
+        //         profitPercent,
+        //         100
+        //     )
+        // ]);
+        // const optionCloseStream = new Core.IQOptionStreamOptionClose(
+        //     iqOptionApi.getIQOptionWs(),
+        //     market
+        // );
+        // await optionCloseStream.startStream();
+        // optionCloseStream.on("data", data => console.log(data));
         // console.log(console.log(ordersCreated));
         // console.log(requestId);
         // iqOptionApi
