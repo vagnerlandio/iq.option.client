@@ -118,7 +118,7 @@ export class IQOptionApi {
         amount: number
     ): Promise<Core.IQOptionOptionOpened> {
         return this.orderPlacementQueue.schedule(() => {
-            Core.logger().info(`IQOptionApi::sendOrder`, {
+            Core.logger().silly(`IQOptionApi::sendOrder`, {
                 market,
                 side,
                 time,
