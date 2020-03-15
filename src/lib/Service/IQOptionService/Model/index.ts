@@ -16,3 +16,4 @@ export * from "./IQOptionProfile";
 export * from "./IQOptionCurrency";
 export * from "./IQOptionCurrencyType";
 export * from "./IQOptionOptionOpened";
+export * from "./IQOptionOptionClosed";
