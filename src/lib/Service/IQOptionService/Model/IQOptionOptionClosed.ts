@@ -10,13 +10,14 @@
 /**
  * Option Opened.
  */
-export interface IQOptionOptionOpened {
+export interface IQOptionOptionClosed {
     index: number;
     value: number;
     active: string;
     aff_id: number;
     amount: number;
     params: null;
+    result: string;
     balance: number;
     is_demo: boolean;
     user_id: number;
@@ -34,6 +35,7 @@ export interface IQOptionOptionOpened {
     option_type: string;
     platform_id: number;
     is_can_trade: boolean;
+    actual_expire: number;
     currency_mask: string;
     profit_amount: number;
     tournament_id: null;
@@ -43,6 +45,8 @@ export interface IQOptionOptionOpened {
     balance_type_id: number;
     enrolled_amount: number;
     expiration_time: number;
+    expiration_value: number;
     client_platform_id: number;
+    win_enrolled_amount: number;
     open_time_millisecond: number;
 }
