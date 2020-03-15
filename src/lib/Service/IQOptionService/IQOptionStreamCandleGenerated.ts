@@ -50,6 +50,7 @@ export class IQOptionStreamCandleGenerated extends Readable
      * Start stream.
      */
     public async startStream(): Promise<void> {
+        Core.logger().silly("IQOptionStreamCandleGenerated::startStream");
         return this.subscribeCandle()
             .then(() =>
                 this.iqOptionWS
@@ -64,7 +65,7 @@ export class IQOptionStreamCandleGenerated extends Readable
      * Candle subscribe.
      */
     private subscribeCandle(): Promise<void> {
-        Core.logger().silly("IQOptionApi::subscribeCandle");
+        Core.logger().silly("IQOptionStreamCandleGenerated::subscribeCandle");
         if (this.iqOptionWS.isConnected()) {
             return Promise.reject("Socket is not connected.");
         }
