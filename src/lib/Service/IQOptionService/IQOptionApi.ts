@@ -7,7 +7,7 @@
  * Proprietary and confidential.
  */
 import Bottleneck from "bottleneck";
-import * as Core from "../../index";
+import * as Core from "../..";
 import { iqOptionExpired } from "./IQOptionExpired";
 import { IQOptionWrapper } from "./IQOptionWrapper";
 import { IQOptionWs } from "./IQOptionWs";
@@ -163,5 +163,20 @@ export class IQOptionApi {
                     });
                 });
         });
+    }
+
+    public getInstruments(market: Core.IQOptionMarket, instrumentType: Core.IQOptionInstrumentType) {
+        return this.orderPlacementQueue.schedule(() => {
+            Core.logger().silly(`IQOptionApi::getInstruments`);
+            return this.iqOptionWs
+                .send(Core.IQOptionName.SEND_MESSAGE, {
+                    name: Core.IQOptionAction.GET_INSTRUMENTS,
+                    version: "1.0",
+                    body: {
+                        type: instrumentType
+                    }
+                })
+        });
+        // {"name":"sendMessage","request_id":"35","msg":{"name":"get-instruments","version":"4.0","body":{"type":"cfd"}}}
     }
 }

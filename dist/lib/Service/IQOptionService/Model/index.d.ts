@@ -9,3 +9,4 @@ export * from "./IQOptionCurrency";
 export * from "./IQOptionCurrencyType";
 export * from "./IQOptionOptionOpened";
 export * from "./IQOptionOptionClosed";
+export * from "./IQOptionInstrumentType";

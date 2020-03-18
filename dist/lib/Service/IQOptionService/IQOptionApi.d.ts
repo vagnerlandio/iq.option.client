@@ -1,4 +1,4 @@
-import * as Core from "../../index";
+import * as Core from "../..";
 import { IQOptionWs } from "./IQOptionWs";
 /**
  * IQOption api.
@@ -52,4 +52,5 @@ export declare class IQOptionApi {
      * @param amount
      */
     sendOrderBinary(market: Core.IQOptionMarket, side: Core.IQOptionModel, time: Core.IQOptionTime, userBalanceId: number, profitPercent: number, amount: number): Promise<Core.IQOptionOptionOpened>;
+    getInstruments(market: Core.IQOptionMarket, instrumentType: Core.IQOptionInstrumentType): Promise<any>;
 }

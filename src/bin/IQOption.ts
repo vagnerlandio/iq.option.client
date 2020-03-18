@@ -59,7 +59,7 @@ iqOptionApi
         // OPTIONS
         // const currency = Core.IQOptionCurrency.USD;
         // const profitPercent = 87;
-        // const market = Core.IQOptionMarket.EURUSD_OTC;
+        const market = Core.IQOptionMarket.EURJPY;
         // const time = Core.IQOptionTime.ONE_MINUTE;
 
         // const candleStream = new Core.IQOptionStreamCandleGenerated(
@@ -69,9 +69,13 @@ iqOptionApi
         // );
 
         // const balance = findUserBalanceFiat(profile.balances, currency, true);
-        iqOptionApi.getIQOptionWs().socket().on("message", data => console.log(data));
-        await Core.sleepHelper(2000)
-        await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"get-instruments","version":"4.0","body":{"type":"cfd"}});
+        // iqOptionApi.getIQOptionWs().socket().on("message", data => console.log(data));
+        // await Core.sleepHelper(2000)
+        // await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"get-commissions","version":"1.0","body":{"instrument_type":"digital-option","user_group_id":193}});
+        // await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"get-active-schedule","version":"1.0","body":{"instrument_type":"digital-option","period":7}});
+        await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"commission-changed","version":"1.0","params":{"routingFilters":{"instrument_type":"digital-option","user_group_id":193}}});
+    
+    
     
 
         // START STREAM
@@ -128,10 +132,11 @@ iqOptionApi
         // optionCloseStream.on("data", data => console.log(data));
         // console.log(console.log(ordersCreated));
         // console.log(requestId);
-        // iqOptionApi
-        //     .getIQOptionWs()
-        //     .socket()
-        //     .on("message", data => console.log(data));
+        // iqOptionApi.getInstruments(market, Core.IQOptionInstrumentType.BINARY)
+        iqOptionApi
+            .getIQOptionWs()
+            .socket()
+            .on("message", data => console.log(data));
     })
     .catch((e: any) => {
         Core.logger().error(JSON.stringify(e));
