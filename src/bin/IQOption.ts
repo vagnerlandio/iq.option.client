@@ -64,8 +64,8 @@ iqOptionApi
         const responseData = await iqOptionApi.getInitializationData();
         console.log(responseData);
 
-        const responseData2 = await iqOptionApi.getInitializationData();
-        console.log(responseData2);
+        // const responseData2 = await iqOptionApi.getInitializationData();
+        // console.log(responseData2);
         // const candleStream = new Core.IQOptionStreamCandleGenerated(
         //     iqOptionApi.getIQOptionWs(),
         //     market,

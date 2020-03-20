@@ -68,7 +68,7 @@ export declare class IQOptionApi {
     /**
      * Get initialization data.
      */
-    getInitializationData(): Promise<unknown>;
+    getInitializationData(): Promise<Core.IQOptionInitializationData>;
     /**
      * Get next request id.
      */

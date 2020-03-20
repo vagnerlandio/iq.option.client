@@ -194,53 +194,54 @@ export class IQOptionApi {
         return this.orderPlacementQueue.schedule(() => {
             Core.logger().silly(`IQOptionApi::getInstruments`);
             const requestID = this.getNextRequestID();
-            return this.iqOptionWs
-                .send(
-                    Core.IQOptionName.SEND_MESSAGE,
-                    {
-                        name: Core.IQOptionAction.GET_INSTRUMENTS,
-                        version: "1.0",
-                        body: {
-                            type: instrumentType
-                        }
-                    },
-                    requestID
-                );
+            return this.iqOptionWs.send(
+                Core.IQOptionName.SEND_MESSAGE,
+                {
+                    name: Core.IQOptionAction.GET_INSTRUMENTS,
+                    version: "1.0",
+                    body: {
+                        type: instrumentType
+                    }
+                },
+                requestID
+            );
         });
     }
 
     /**
      * Get initialization data.
      */
-    public getInitializationData() {
+    public getInitializationData(): Promise<Core.IQOptionInitializationData> {
         return this.orderPlacementQueue.schedule(() => {
             Core.logger().silly(`IQOptionApi::getInitializationData`);
             const requestID = this.getNextRequestID();
-            return this.iqOptionWs.send(
-                Core.IQOptionName.SEND_MESSAGE,
-                {
-                    name: Core.IQOptionAction.GET_INITIALIZATION_DATA,
-                    version: "3.0",
-                    body: {}
-                },
-                requestID
-            ).then(() => {
-                return new Promise((resolve, reject) => {
-                    this.iqOptionWs.socket().on("message", message => {
-                        const messageJSON = JSON.parse(message.toString());
-                        if (
-                            messageJSON.name ===
-                            Core.IQOptionAction.INITIALIZATION_DATA
-                        ) {
-                            resolve(messageJSON.msg);
-                        }
+            return this.iqOptionWs
+                .send(
+                    Core.IQOptionName.SEND_MESSAGE,
+                    {
+                        name: Core.IQOptionAction.GET_INITIALIZATION_DATA,
+                        version: "3.0",
+                        body: {}
+                    },
+                    requestID
+                )
+                .then(() => {
+                    return new Promise((resolve, reject) => {
+                        this.iqOptionWs.socket().on("message", message => {
+                            const messageJSON = JSON.parse(message.toString());
+                            if (
+                                messageJSON.name ===
+                                Core.IQOptionAction.INITIALIZATION_DATA
+                            ) {
+                                resolve(messageJSON.msg);
+                            }
+                        });
+                        setTimeout(
+                            () => reject("It was not possible to send order."),
+                            this.maxWaitToSendOrder
+                        );
                     });
-                    setTimeout(
-                        () => reject("It was not possible to send order."),
-                        this.maxWaitToSendOrder
-                    );
                 });
-            });
         });
     }
 
