@@ -134,6 +134,28 @@ iqOptionApi
         // console.log(console.log(ordersCreated));
         // console.log(requestId);
         // iqOptionApi.getInstruments(market, Core.IQOptionInstrumentType.BINARY)
+        let data;
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
+        data = await iqOptionApi.getInitializationData();
         iqOptionApi
             .getIQOptionWs()
             .socket()

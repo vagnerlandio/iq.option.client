@@ -13,6 +13,10 @@ export declare class IQOptionApi {
      */
     private readonly maxWaitToSendOrder;
     /**
+     * Max wait profile response.
+     */
+    private readonly maxWaitToInitializationData;
+    /**
      * Request ID.
      */
     private requestID;
@@ -58,13 +62,6 @@ export declare class IQOptionApi {
      * @param amount
      */
     sendOrderBinary(market: Core.IQOptionMarket, side: Core.IQOptionModel, time: Core.IQOptionTime, userBalanceId: number, profitPercent: number, amount: number): Promise<Core.IQOptionOptionOpened>;
-    /**
-     * Get instruments.
-     *
-     * @param market
-     * @param instrumentType
-     */
-    getInstruments(market: Core.IQOptionMarket, instrumentType: Core.IQOptionInstrumentType): Promise<any>;
     /**
      * Get initialization data.
      */

@@ -27,6 +27,11 @@ export class IQOptionApi {
     private readonly maxWaitToSendOrder: number = 5000;
 
     /**
+     * Max wait profile response.
+     */
+    private readonly maxWaitToInitializationData: number = 5000;
+
+    /**
      * Request ID.
      */
     private requestID: number = 0;
@@ -100,12 +105,16 @@ export class IQOptionApi {
             const listener = (message: any) => {
                 const messageJSON = JSON.parse(message.toString());
                 if (messageJSON.name === Core.IQOptionAction.PROFILE) {
+                    this.iqOptionWs.socket().off("message", listener);
                     resolve(messageJSON.msg);
                 }
             };
             this.iqOptionWs.socket().on("message", listener);
             setTimeout(
-                () => reject("It was not possible to receive the profile."),
+                () => {
+                    this.iqOptionWs.socket().off("message", listener);
+                    reject("It was not possible to receive the profile.")
+                },
                 this.maxWaitProfile
             );
         });
@@ -164,49 +173,27 @@ export class IQOptionApi {
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_OPENED
                             ) {
+                                this.iqOptionWs.socket().off("message", listener);
                                 resolve(messageJSON.msg);
                             }
                             if (
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_REJECT
                             ) {
+                                this.iqOptionWs.socket().off("message", listener);
                                 reject(messageJSON.msg);
                             }
                         };
                         this.iqOptionWs.socket().on("message", listener);
                         setTimeout(
-                            () => reject("It was not possible to send order."),
+                            () => {
+                                this.iqOptionWs.socket().off("message", listener);
+                                reject("It was not possible to send order.")
+                            },
                             this.maxWaitToSendOrder
                         );
                     });
                 });
-        });
-    }
-
-    /**
-     * Get instruments.
-     *
-     * @param market
-     * @param instrumentType
-     */
-    public getInstruments(
-        market: Core.IQOptionMarket,
-        instrumentType: Core.IQOptionInstrumentType
-    ) {
-        return this.orderPlacementQueue.schedule(() => {
-            Core.logger().silly(`IQOptionApi::getInstruments`);
-            const requestID = this.getNextRequestID();
-            return this.iqOptionWs.send(
-                Core.IQOptionName.SEND_MESSAGE,
-                {
-                    name: Core.IQOptionAction.GET_INSTRUMENTS,
-                    version: "1.0",
-                    body: {
-                        type: instrumentType
-                    }
-                },
-                requestID
-            );
         });
     }
 
@@ -235,13 +222,17 @@ export class IQOptionApi {
                                 messageJSON.name ===
                                 Core.IQOptionAction.INITIALIZATION_DATA
                             ) {
+                                this.iqOptionWs.socket().off("message", listener);
                                 resolve(messageJSON.msg);
                             }
                         };
                         this.iqOptionWs.socket().on("message", listener);
                         setTimeout(
-                            () => reject("It was not initialization data."),
-                            this.maxWaitToSendOrder
+                            () => {
+                                this.iqOptionWs.socket().off("message", listener);
+                                reject("No initialization data.")
+                            },
+                            this.maxWaitToInitializationData
                         );
                     });
                 });
