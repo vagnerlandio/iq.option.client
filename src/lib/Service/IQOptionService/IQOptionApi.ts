@@ -103,7 +103,6 @@ export class IQOptionApi {
                     resolve(messageJSON.msg);
                 }
             };
-            this.iqOptionWs.socket().off("message", message => listener(message));
             this.iqOptionWs.socket().on("message", message => listener(message));
             setTimeout(
                 () => reject("It was not possible to receive the profile."),
@@ -174,7 +173,6 @@ export class IQOptionApi {
                                 reject(messageJSON.msg);
                             }
                         };
-                        this.iqOptionWs.socket().off("message", message => listener(message));
                         this.iqOptionWs.socket().on("message", message => listener(message));
                         setTimeout(
                             () => reject("It was not possible to send order."),
@@ -239,8 +237,7 @@ export class IQOptionApi {
                             ) {
                                 resolve(messageJSON.msg);
                             }
-                        }
-                        this.iqOptionWs.socket().off("message", message => listener(message));
+                        };
                         this.iqOptionWs.socket().on("message", message => listener(message));
                         setTimeout(
                             () => reject("It was not initialization data."),
