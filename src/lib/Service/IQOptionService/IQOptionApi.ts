@@ -97,12 +97,14 @@ export class IQOptionApi {
     public profileAsync(): Promise<Core.IQOptionProfile> {
         Core.logger().silly("IQOptionApi::profileAsync");
         return new Promise((resolve, reject) => {
-            this.iqOptionWs.socket().on("message", message => {
+            const listener = (message: any) => {
                 const messageJSON = JSON.parse(message.toString());
                 if (messageJSON.name === Core.IQOptionAction.PROFILE) {
                     resolve(messageJSON.msg);
                 }
-            });
+            };
+            this.iqOptionWs.socket().off("message", message => listener(message));
+            this.iqOptionWs.socket().on("message", message => listener(message));
             setTimeout(
                 () => reject("It was not possible to receive the profile."),
                 this.maxWaitProfile
