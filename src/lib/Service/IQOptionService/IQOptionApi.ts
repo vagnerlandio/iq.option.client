@@ -115,7 +115,7 @@ export class IQOptionApi {
      *
      * @param market
      * @param side
-     * @param time
+     * @param expirationTime
      * @param userBalanceId
      * @param profitPercent
      * @param amount
@@ -123,7 +123,7 @@ export class IQOptionApi {
     public sendOrderBinary(
         market: Core.IQOptionMarket,
         side: Core.IQOptionModel,
-        time: Core.IQOptionTime,
+        expirationTime: number,
         userBalanceId: number,
         profitPercent: number,
         amount: number
@@ -132,7 +132,7 @@ export class IQOptionApi {
             Core.logger().silly(`IQOptionApi::sendOrder`, {
                 market,
                 side,
-                time,
+                time: expirationTime,
                 amount
             });
             const requestID = this.getNextRequestID();
@@ -147,7 +147,7 @@ export class IQOptionApi {
                             active_id: market,
                             option_type_id: 3, // todo
                             direction: side,
-                            expired: iqOptionExpired(time),
+                            expired: expirationTime,
                             refund_value: 0, // todo
                             price: amount,
                             profit_percent: profitPercent
