@@ -157,7 +157,7 @@ export class IQOptionApi {
                 )
                 .then(() => {
                     return new Promise((resolve, reject) => {
-                        this.iqOptionWs.socket().on("message", message => {
+                        const listener = (message: any) => {
                             const messageJSON = JSON.parse(message.toString());
                             if (
                                 messageJSON.name ===
@@ -171,7 +171,9 @@ export class IQOptionApi {
                             ) {
                                 reject(messageJSON.msg);
                             }
-                        });
+                        };
+                        this.iqOptionWs.socket().off("message", message => listener(message));
+                        this.iqOptionWs.socket().on("message", message => listener(message));
                         setTimeout(
                             () => reject("It was not possible to send order."),
                             this.maxWaitToSendOrder
@@ -227,7 +229,7 @@ export class IQOptionApi {
                 )
                 .then(() => {
                     return new Promise((resolve, reject) => {
-                        this.iqOptionWs.socket().on("message", message => {
+                        const listener = (message: any) => {
                             const messageJSON = JSON.parse(message.toString());
                             if (
                                 messageJSON.name ===
@@ -235,9 +237,11 @@ export class IQOptionApi {
                             ) {
                                 resolve(messageJSON.msg);
                             }
-                        });
+                        }
+                        this.iqOptionWs.socket().off("message", message => listener(message));
+                        this.iqOptionWs.socket().on("message", message => listener(message));
                         setTimeout(
-                            () => reject("It was not possible to send order."),
+                            () => reject("It was not initialization data."),
                             this.maxWaitToSendOrder
                         );
                     });
