@@ -45,9 +45,9 @@ class IQOptionWs {
      *
      * @param name
      * @param msg
-     * @param requestId
+     * @param requestID
      */
-    send(name, msg, requestId) {
+    send(name, msg, requestID) {
         Core.logger().silly("IQOptionWs::send");
         if (!this._socket) {
             return Promise.reject("Socket is not connected.");
@@ -56,8 +56,8 @@ class IQOptionWs {
             name,
             msg
         };
-        if (requestId) {
-            message.request_id = requestId;
+        if (requestID) {
+            message.request_id = requestID;
         }
         return Promise.resolve(this._socket.send(JSON.stringify(message)));
     }

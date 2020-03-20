@@ -1,3 +1,4 @@
 export enum IQOptionInstrumentType {
-    BINARY = "cfd"
-};
+    CFD = "cfd",
+    DIGITAL_OPTION = "digital-option"
+}

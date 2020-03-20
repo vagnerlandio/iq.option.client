@@ -19,12 +19,17 @@ export class IQOptionApi {
     /**
      * Max wait profile response.
      */
-    private readonly maxWaitProfile = 5000;
+    private readonly maxWaitProfile: number = 5000;
 
     /**
      * Max wait profile response.
      */
-    private readonly maxWaitToSendOrder = 5000;
+    private readonly maxWaitToSendOrder: number = 5000;
+
+    /**
+     * Request ID.
+     */
+    private requestID: number = 0;
 
     /**
      * IQ option wrapper.
@@ -67,7 +72,11 @@ export class IQOptionApi {
                 return this.iqOptionWs
                     .connect()
                     .then(() =>
-                        this.iqOptionWs.send(Core.IQOptionName.SSID, token)
+                        this.iqOptionWs.send(
+                            Core.IQOptionName.SSID,
+                            token,
+                            this.getNextRequestID()
+                        )
                     )
                     .then(() => this.profileAsync())
                     .catch(e => Promise.reject(e));
@@ -107,6 +116,8 @@ export class IQOptionApi {
      * @param market
      * @param side
      * @param time
+     * @param userBalanceId
+     * @param profitPercent
      * @param amount
      */
     public sendOrderBinary(
@@ -124,21 +135,26 @@ export class IQOptionApi {
                 time,
                 amount
             });
+            const requestID = this.getNextRequestID();
             return this.iqOptionWs
-                .send(Core.IQOptionName.SEND_MESSAGE, {
-                    name: Core.IQOptionAction.BINARY_OPEN_OPTION,
-                    version: "1.0",
-                    body: {
-                        user_balance_id: userBalanceId,
-                        active_id: market,
-                        option_type_id: 3, // todo
-                        direction: side,
-                        expired: iqOptionExpired(time),
-                        refund_value: 0, // todo
-                        price: amount,
-                        profit_percent: profitPercent
-                    }
-                })
+                .send(
+                    Core.IQOptionName.SEND_MESSAGE,
+                    {
+                        name: Core.IQOptionAction.BINARY_OPEN_OPTION,
+                        version: "1.0",
+                        body: {
+                            user_balance_id: userBalanceId,
+                            active_id: market,
+                            option_type_id: 3, // todo
+                            direction: side,
+                            expired: iqOptionExpired(time),
+                            refund_value: 0, // todo
+                            price: amount,
+                            profit_percent: profitPercent
+                        }
+                    },
+                    requestID
+                )
                 .then(() => {
                     return new Promise((resolve, reject) => {
                         this.iqOptionWs.socket().on("message", message => {
@@ -165,18 +181,74 @@ export class IQOptionApi {
         });
     }
 
-    public getInstruments(market: Core.IQOptionMarket, instrumentType: Core.IQOptionInstrumentType) {
+    /**
+     * Get instruments.
+     *
+     * @param market
+     * @param instrumentType
+     */
+    public getInstruments(
+        market: Core.IQOptionMarket,
+        instrumentType: Core.IQOptionInstrumentType
+    ) {
         return this.orderPlacementQueue.schedule(() => {
             Core.logger().silly(`IQOptionApi::getInstruments`);
+            const requestID = this.getNextRequestID();
             return this.iqOptionWs
-                .send(Core.IQOptionName.SEND_MESSAGE, {
-                    name: Core.IQOptionAction.GET_INSTRUMENTS,
-                    version: "1.0",
-                    body: {
-                        type: instrumentType
-                    }
-                })
+                .send(
+                    Core.IQOptionName.SEND_MESSAGE,
+                    {
+                        name: Core.IQOptionAction.GET_INSTRUMENTS,
+                        version: "1.0",
+                        body: {
+                            type: instrumentType
+                        }
+                    },
+                    requestID
+                );
         });
-        // {"name":"sendMessage","request_id":"35","msg":{"name":"get-instruments","version":"4.0","body":{"type":"cfd"}}}
+    }
+
+    /**
+     * Get initialization data.
+     */
+    public getInitializationData() {
+        return this.orderPlacementQueue.schedule(() => {
+            Core.logger().silly(`IQOptionApi::getInitializationData`);
+            const requestID = this.getNextRequestID();
+            return this.iqOptionWs.send(
+                Core.IQOptionName.SEND_MESSAGE,
+                {
+                    name: Core.IQOptionAction.GET_INITIALIZATION_DATA,
+                    version: "3.0",
+                    body: {}
+                },
+                requestID
+            ).then(() => {
+                return new Promise((resolve, reject) => {
+                    this.iqOptionWs.socket().on("message", message => {
+                        const messageJSON = JSON.parse(message.toString());
+                        if (
+                            messageJSON.name ===
+                            Core.IQOptionAction.INITIALIZATION_DATA
+                        ) {
+                            resolve(messageJSON.msg);
+                        }
+                    });
+                    setTimeout(
+                        () => reject("It was not possible to send order."),
+                        this.maxWaitToSendOrder
+                    );
+                });
+            });
+        });
+    }
+
+    /**
+     * Get next request id.
+     */
+    public getNextRequestID(): number {
+        this.requestID++;
+        return this.requestID;
     }
 }

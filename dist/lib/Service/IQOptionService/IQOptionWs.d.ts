@@ -25,9 +25,9 @@ export declare class IQOptionWs {
      *
      * @param name
      * @param msg
-     * @param requestId
+     * @param requestID
      */
-    send(name: Core.IQOptionName, msg: any, requestId?: number): Promise<any>;
+    send(name: Core.IQOptionName, msg: any, requestID?: number): Promise<any>;
     /**
      * Get _socket.
      */

@@ -8,5 +8,7 @@ export declare enum IQOptionAction {
     BINARY_OPTION_OPENED = "option-opened",
     BINARY_OPTION_CLOSE = "option-closed",
     BINARY_OPTION_REJECT = "option-rejected",
-    GET_INSTRUMENTS = "get-instruments"
+    GET_INSTRUMENTS = "get-instruments",
+    GET_INITIALIZATION_DATA = "get-initialization-data",
+    INITIALIZATION_DATA = "initialization-data"
 }

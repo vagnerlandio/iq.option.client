@@ -61,7 +61,11 @@ iqOptionApi
         // const profitPercent = 87;
         const market = Core.IQOptionMarket.EURJPY;
         // const time = Core.IQOptionTime.ONE_MINUTE;
+        const responseData = await iqOptionApi.getInitializationData();
+        console.log(responseData);
 
+        const responseData2 = await iqOptionApi.getInitializationData();
+        console.log(responseData2);
         // const candleStream = new Core.IQOptionStreamCandleGenerated(
         //     iqOptionApi.getIQOptionWs(),
         //     market,
@@ -73,10 +77,7 @@ iqOptionApi
         // await Core.sleepHelper(2000)
         // await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"get-commissions","version":"1.0","body":{"instrument_type":"digital-option","user_group_id":193}});
         // await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"get-active-schedule","version":"1.0","body":{"instrument_type":"digital-option","period":7}});
-        await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, {"name":"commission-changed","version":"1.0","params":{"routingFilters":{"instrument_type":"digital-option","user_group_id":193}}});
-    
-    
-    
+        // await iqOptionApi.getIQOptionWs().send(Core.IQOptionName.SEND_MESSAGE, );
 
         // START STREAM
         // await candleStream.startStream();

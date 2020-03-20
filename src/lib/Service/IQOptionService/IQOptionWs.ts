@@ -51,12 +51,12 @@ export class IQOptionWs {
      *
      * @param name
      * @param msg
-     * @param requestId
+     * @param requestID
      */
     public send(
         name: Core.IQOptionName,
         msg: any,
-        requestId?: number
+        requestID?: number
     ): Promise<any> {
         Core.logger().silly("IQOptionWs::send");
         if (!this._socket) {
@@ -66,8 +66,8 @@ export class IQOptionWs {
             name,
             msg
         };
-        if (requestId) {
-            message.request_id = requestId;
+        if (requestID) {
+            message.request_id = requestID;
         }
         return Promise.resolve(this._socket.send(JSON.stringify(message)));
     }
