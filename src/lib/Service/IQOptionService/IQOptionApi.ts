@@ -8,7 +8,6 @@
  */
 import Bottleneck from "bottleneck";
 import * as Core from "../..";
-import { iqOptionExpired } from "./IQOptionExpired";
 import { IQOptionWrapper } from "./IQOptionWrapper";
 import { IQOptionWs } from "./IQOptionWs";
 
@@ -130,7 +129,7 @@ export class IQOptionApi {
     public sendOrderBinary(
         market: Core.IQOptionMarket,
         side: Core.IQOptionModel,
-        time: Core.IQOptionTime,
+        time: number,
         userBalanceId: number,
         profitPercent: number,
         amount: number
@@ -154,7 +153,7 @@ export class IQOptionApi {
                             active_id: market,
                             option_type_id: 3, // todo
                             direction: side,
-                            expired: iqOptionExpired(time),
+                            expired: time,
                             refund_value: 0, // todo
                             price: amount,
                             profit_percent: profitPercent,
