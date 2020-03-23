@@ -8,16 +8,21 @@
  */
 
 /**
- * Model types.
+ * IQ Option Result.
  */
-export enum IQOptionModel {
+export enum IQOptionResult {
     /**
-     * Buy order.
+     * EQUAL result..
      */
-    BUY = "call",
+    EQUAL = "equal",
 
     /**
-     * Sell order.
+     * Win result.
      */
-    SELL = "put",
+    WIN = "win",
+
+    /**
+     * Loss result.
+     */
+    LOOSE = "loose",
 }

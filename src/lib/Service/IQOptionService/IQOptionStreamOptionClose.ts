@@ -53,7 +53,7 @@ export class IQOptionStreamOptionClose extends Readable
         }
         this.iqOptionWS
             .socket()
-            .on("message", data => this.parseMessage(data.toString()));
+            .on("message", (data) => this.parseMessage(data.toString()));
         return Promise.resolve();
     }
 

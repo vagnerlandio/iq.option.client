@@ -63,10 +63,10 @@ export class IQOptionStreamCandleGenerated extends Readable
             .then(() =>
                 this.iqOptionWS
                     .socket()
-                    .on("message", data => this.parseMessage(data.toString()))
+                    .on("message", (data) => this.parseMessage(data.toString()))
             )
             .then(() => Promise.resolve())
-            .catch(e => Promise.reject(e));
+            .catch((e) => Promise.reject(e));
     }
 
     /**
@@ -80,8 +80,8 @@ export class IQOptionStreamCandleGenerated extends Readable
         const message = {
             name: Core.IQOptionAction.CANDLE_GENERATED,
             params: {
-                routingFilters: { active_id: this.market, size: this.time }
-            }
+                routingFilters: { active_id: this.market, size: this.time },
+            },
         };
         return Promise.resolve(
             this.iqOptionWS.send(Core.IQOptionName.SUBSCRIBE_MESSAGE, message)

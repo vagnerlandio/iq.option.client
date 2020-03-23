@@ -48,7 +48,7 @@ export class IQOptionWrapper {
         this.password = password;
         this.client = axios.create({
             httpAgent: new http.Agent({ keepAlive: true }),
-            httpsAgent: new https.Agent({ keepAlive: true })
+            httpsAgent: new https.Agent({ keepAlive: true }),
         });
     }
 
@@ -59,10 +59,10 @@ export class IQOptionWrapper {
         Core.logger().silly("IQOptionWrapper::auth");
         return this.request("api/v1.0/login", {
             email: this.email,
-            password: this.password
+            password: this.password,
         })
-            .then(r => r.data.ssid)
-            .catch(e => Promise.reject(e));
+            .then((r) => r.data.ssid)
+            .catch((e) => Promise.reject(e));
     }
 
     /**
@@ -79,12 +79,12 @@ export class IQOptionWrapper {
         options.url = path;
         options.headers = {
             "Content-type": "application/x-www-form-urlencoded",
-            Accept: "application/json"
+            Accept: "application/json",
         };
         options.data = qs.stringify(data);
         return this.client
             .request(options)
-            .then(response => Promise.resolve(response.data))
-            .catch(e => Promise.reject(e.response.data));
+            .then((response) => Promise.resolve(response.data))
+            .catch((e) => Promise.reject(e.response.data));
     }
 }

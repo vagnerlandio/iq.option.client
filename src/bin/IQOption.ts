@@ -34,7 +34,7 @@ const candles: {
     open: [],
     close: [],
     high: [],
-    low: []
+    low: [],
 } as any;
 
 export const findUserBalanceFiat = (
@@ -44,18 +44,18 @@ export const findUserBalanceFiat = (
 ): Core.IQOptionBalance => {
     if (test) {
         return balances.filter(
-            f => f.type === Core.IQOptionCurrencyType.TEST
+            (f) => f.type === Core.IQOptionCurrencyType.TEST
         )[0];
     }
     return balances.filter(
-        f =>
+        (f) =>
             f.currency === currency && f.type === Core.IQOptionCurrencyType.FIAT
     )[0];
 };
 
 iqOptionApi
     .connectAsync()
-    .then(async profile => {
+    .then(async (profile) => {
         // OPTIONS
         // const currency = Core.IQOptionCurrency.USD;
         // const profitPercent = 87;
@@ -159,7 +159,7 @@ iqOptionApi
         iqOptionApi
             .getIQOptionWs()
             .socket()
-            .on("message", data => console.log(data));
+            .on("message", (data) => console.log(data));
     })
     .catch((e: any) => {
         Core.logger().error(JSON.stringify(e));

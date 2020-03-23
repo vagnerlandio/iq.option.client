@@ -13,5 +13,5 @@
 export enum IQOptionCurrencyType {
     FIAT = 1,
     TEST = 4,
-    CRYPTO = 5
+    CRYPTO = 5,
 }

@@ -15,5 +15,5 @@ export enum IQOptionTime {
     FOUR_MINUTES = 4,
     THREE_MINUTES = 3,
     TWO_MINUTES = 2,
-    ONE_MINUTE = 1
+    ONE_MINUTE = 1,
 }

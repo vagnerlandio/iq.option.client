@@ -23,11 +23,11 @@ class LoggerHelper {
                     format: Winston.format.combine(
                         Winston.format.colorize(),
                         Winston.format.simple()
-                    )
-                })
+                    ),
+                }),
             };
             LoggerHelper.logger = Winston.createLogger({
-                transports: [transports.console]
+                transports: [transports.console],
             });
         }
         return LoggerHelper.logger;

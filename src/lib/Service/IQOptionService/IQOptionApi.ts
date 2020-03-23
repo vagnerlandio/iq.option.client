@@ -51,7 +51,7 @@ export class IQOptionApi {
      */
     private readonly orderPlacementQueue = new Bottleneck({
         maxConcurrent: 1,
-        minTime: 1
+        minTime: 1,
     });
 
     /**
@@ -73,7 +73,7 @@ export class IQOptionApi {
         Core.logger().silly("IQOptionApi::connectAsync");
         return this.iqOptionWrapper
             .auth()
-            .then(token => {
+            .then((token) => {
                 return this.iqOptionWs
                     .connect()
                     .then(() =>
@@ -84,9 +84,9 @@ export class IQOptionApi {
                         )
                     )
                     .then(() => this.profileAsync())
-                    .catch(e => Promise.reject(e));
+                    .catch((e) => Promise.reject(e));
             })
-            .catch(e => Promise.reject(e));
+            .catch((e) => Promise.reject(e));
     }
 
     /**
@@ -110,13 +110,10 @@ export class IQOptionApi {
                 }
             };
             this.iqOptionWs.socket().on("message", listener);
-            setTimeout(
-                () => {
-                    this.iqOptionWs.socket().off("message", listener);
-                    reject("It was not possible to receive the profile.")
-                },
-                this.maxWaitProfile
-            );
+            setTimeout(() => {
+                this.iqOptionWs.socket().off("message", listener);
+                reject("It was not possible to receive the profile.");
+            }, this.maxWaitProfile);
         });
     }
 
@@ -143,7 +140,7 @@ export class IQOptionApi {
                 market,
                 side,
                 time,
-                amount
+                amount,
             });
             const requestID = this.getNextRequestID();
             return this.iqOptionWs
@@ -160,8 +157,8 @@ export class IQOptionApi {
                             expired: iqOptionExpired(time),
                             refund_value: 0, // todo
                             price: amount,
-                            profit_percent: profitPercent
-                        }
+                            profit_percent: profitPercent,
+                        },
                     },
                     requestID
                 )
@@ -173,25 +170,26 @@ export class IQOptionApi {
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_OPENED
                             ) {
-                                this.iqOptionWs.socket().off("message", listener);
+                                this.iqOptionWs
+                                    .socket()
+                                    .off("message", listener);
                                 resolve(messageJSON.msg);
                             }
                             if (
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_REJECT
                             ) {
-                                this.iqOptionWs.socket().off("message", listener);
+                                this.iqOptionWs
+                                    .socket()
+                                    .off("message", listener);
                                 reject(messageJSON.msg);
                             }
                         };
                         this.iqOptionWs.socket().on("message", listener);
-                        setTimeout(
-                            () => {
-                                this.iqOptionWs.socket().off("message", listener);
-                                reject("It was not possible to send order.")
-                            },
-                            this.maxWaitToSendOrder
-                        );
+                        setTimeout(() => {
+                            this.iqOptionWs.socket().off("message", listener);
+                            reject("It was not possible to send order.");
+                        }, this.maxWaitToSendOrder);
                     });
                 });
         });
@@ -210,7 +208,7 @@ export class IQOptionApi {
                     {
                         name: Core.IQOptionAction.GET_INITIALIZATION_DATA,
                         version: "3.0",
-                        body: {}
+                        body: {},
                     },
                     requestID
                 )
@@ -222,18 +220,17 @@ export class IQOptionApi {
                                 messageJSON.name ===
                                 Core.IQOptionAction.INITIALIZATION_DATA
                             ) {
-                                this.iqOptionWs.socket().off("message", listener);
+                                this.iqOptionWs
+                                    .socket()
+                                    .off("message", listener);
                                 resolve(messageJSON.msg);
                             }
                         };
                         this.iqOptionWs.socket().on("message", listener);
-                        setTimeout(
-                            () => {
-                                this.iqOptionWs.socket().off("message", listener);
-                                reject("No initialization data.")
-                            },
-                            this.maxWaitToInitializationData
-                        );
+                        setTimeout(() => {
+                            this.iqOptionWs.socket().off("message", listener);
+                            reject("No initialization data.");
+                        }, this.maxWaitToInitializationData);
                     });
                 });
         });

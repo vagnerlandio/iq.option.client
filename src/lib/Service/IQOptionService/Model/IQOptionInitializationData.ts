@@ -64,7 +64,7 @@ export interface IQOptionPurpleBetCloseTime {
 
 export enum IQOptionTitleEnum {
     FrontEndOfMonth = "front.End of month",
-    FrontEndOfWeek = "front.End of week"
+    FrontEndOfWeek = "front.End of week",
 }
 
 export interface IQOptionProfit {
@@ -80,7 +80,7 @@ export interface IQOptionSpecialValue {
 
 export enum IQOptionProvider {
     Feed = "feed",
-    Otc = "OTC"
+    Otc = "OTC",
 }
 
 export interface IQOptionTurbo {

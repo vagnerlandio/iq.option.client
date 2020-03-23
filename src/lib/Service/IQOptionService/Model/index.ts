@@ -19,3 +19,4 @@ export * from "./IQOptionOptionOpened";
 export * from "./IQOptionOptionClosed";
 export * from "./IQOptionInstrumentType";
 export * from "./IQOptionInitializationData";
+export * from "./IQOptionResult";

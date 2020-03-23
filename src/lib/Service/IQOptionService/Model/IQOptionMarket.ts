@@ -121,5 +121,5 @@ export enum IQOptionMarket {
 
     NTDOY = 218,
     USDSEK = 219,
-    USDTRY = 220
+    USDTRY = 220,
 }

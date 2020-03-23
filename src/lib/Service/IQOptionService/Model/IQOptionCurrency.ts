@@ -14,5 +14,5 @@ export enum IQOptionCurrency {
     USD = "USD",
     BTC = "BTC",
     BRL = "BRL",
-    ETH = "ETH"
+    ETH = "ETH",
 }

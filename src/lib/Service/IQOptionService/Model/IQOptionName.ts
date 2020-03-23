@@ -13,5 +13,5 @@
 export enum IQOptionName {
     SSID = "ssid",
     SUBSCRIBE_MESSAGE = "subscribeMessage",
-    SEND_MESSAGE = "sendMessage"
+    SEND_MESSAGE = "sendMessage",
 }
