@@ -21,11 +21,11 @@ class LoggerHelper {
             const transports = {
                 console: new Winston.transports.Console({
                     level: process.env.LOG_LEVEL || "silly",
-                    format: Winston.format.combine(Winston.format.colorize(), Winston.format.simple())
-                })
+                    format: Winston.format.combine(Winston.format.colorize(), Winston.format.simple()),
+                }),
             };
             LoggerHelper.logger = Winston.createLogger({
-                transports: [transports.console]
+                transports: [transports.console],
             });
         }
         return LoggerHelper.logger;

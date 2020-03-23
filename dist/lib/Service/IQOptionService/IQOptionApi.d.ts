@@ -61,7 +61,7 @@ export declare class IQOptionApi {
      * @param profitPercent
      * @param amount
      */
-    sendOrderBinary(market: Core.IQOptionMarket, side: Core.IQOptionModel, time: Core.IQOptionTime, userBalanceId: number, profitPercent: number, amount: number): Promise<Core.IQOptionOptionOpened>;
+    sendOrderBinary(market: Core.IQOptionMarket, side: Core.IQOptionModel, time: number, userBalanceId: number, profitPercent: number, amount: number): Promise<Core.IQOptionOptionOpened>;
     /**
      * Get initialization data.
      */

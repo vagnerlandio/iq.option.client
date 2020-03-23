@@ -54,7 +54,7 @@ class IQOptionWs {
         }
         const message = {
             name,
-            msg
+            msg,
         };
         if (requestID) {
             message.request_id = requestID;
