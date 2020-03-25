@@ -169,19 +169,23 @@ export class IQOptionApi {
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_OPENED
                             ) {
-                                this.iqOptionWs
-                                    .socket()
-                                    .off("message", listener);
-                                resolve(messageJSON.msg);
+                                if (messageJSON.active_id === market) {
+                                    this.iqOptionWs
+                                        .socket()
+                                        .off("message", listener);
+                                    resolve(messageJSON.msg);
+                                }
                             }
                             if (
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_REJECT
                             ) {
-                                this.iqOptionWs
-                                    .socket()
-                                    .off("message", listener);
-                                reject(messageJSON.msg);
+                                if (messageJSON.active_id === market) {
+                                    this.iqOptionWs
+                                        .socket()
+                                        .off("message", listener);
+                                    reject(messageJSON.msg);
+                                }
                             }
                         };
                         this.iqOptionWs.socket().on("message", listener);
