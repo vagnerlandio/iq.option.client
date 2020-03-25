@@ -169,7 +169,7 @@ export class IQOptionApi {
                                 messageJSON.name ===
                                 Core.IQOptionAction.BINARY_OPTION_OPENED
                             ) {
-                                console.log(messageJSON.active_id, market);
+                                console.log(messageJSON, market);
                                 if (messageJSON.active_id === market) {
                                     this.iqOptionWs
                                         .socket()
