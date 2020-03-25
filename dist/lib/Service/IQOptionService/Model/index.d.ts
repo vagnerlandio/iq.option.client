@@ -12,3 +12,4 @@ export * from "./IQOptionOptionClosed";
 export * from "./IQOptionInstrumentType";
 export * from "./IQOptionInitializationData";
 export * from "./IQOptionResult";
+export * from "./IQOptionMode";
